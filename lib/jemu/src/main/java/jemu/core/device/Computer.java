@@ -151,17 +151,17 @@ public abstract class Computer extends Device implements Runnable, ItemListener 
 		super("Computer: " + name);
 		this.applet = applet;
 		this.name = name;
-		this.keyboardListeners = new Vector<ComputerKeyboardListener>();
-		this.performanceListeners = new Vector<ComputerPerformanceListener>();
+		this.keyboardListeners = new Vector<>();
+		this.performanceListeners = new Vector<>();
 		thread.setPriority(Thread.MAX_PRIORITY);
 		thread.start();
 	}
 
 	protected void setBasePath(String path) {
-		String systemDir = Settings.get(Settings.SYSTEM_DIR, "system");
-		File dir = new File(systemDir, path);
-		romPath = new File(dir, "rom").getPath() + File.separator;
-		filePath = new File(dir, "file").getPath() + File.separator;
+		String systemDir = Settings.get(Settings.SYSTEM_DIR, "/");
+		String dir = systemDir + path;
+		romPath = dir + "/rom/";
+		filePath = dir + "/file/";
 	}
 
 	public void initialise() {
@@ -186,26 +186,7 @@ public abstract class Computer extends Device implements Runnable, ItemListener 
 
 	public final InputStream openFile(String name) throws Exception {
 		zipcount = 0;
-		InputStream result;
-
-		// Webstart Application uses this:
-		if (webstart) {
-
-			try {
-				result = new FileInputStream(name);
-			} catch (Exception e) {
-				result = new URL(server + name).openStream();
-			}
-
-		}
-		// Applet & Standalone emulator uses this code:
-		else {
-			try {
-				result = new URL(applet.getCodeBase(), name).openStream();
-			} catch (Exception e) {
-				result = new FileInputStream(name);
-			}
-		}
+		InputStream result = this.getClass().getResourceAsStream(name);
 
 		if (name.toLowerCase().endsWith(".zip") || name.toLowerCase().endsWith(".jtp")) {
 			checkZip(name);
@@ -232,6 +213,7 @@ public abstract class Computer extends Device implements Runnable, ItemListener 
 					}
 				}
 			}
+
 			JOptionPane pane = new JOptionPane(box, JOptionPane.QUESTION_MESSAGE, JOptionPane.CLOSED_OPTION);
 			if (!Switches.loaded) {
 				Switches.loaded = true;
@@ -255,6 +237,7 @@ public abstract class Computer extends Device implements Runnable, ItemListener 
 			result = str;
 			str.close();
 		}
+
 		if (name.toLowerCase().endsWith(".snz") || name.toLowerCase().endsWith(".taz")
 				|| name.toLowerCase().endsWith(".dsz") || name.toLowerCase().endsWith(".szk")) {
 			System.out.println("Opening GZip compressed file...");
@@ -264,39 +247,24 @@ public abstract class Computer extends Device implements Runnable, ItemListener 
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void checkZip(String name) throws Exception {
-		InputStream result;
+		InputStream result = this.getClass().getResourceAsStream(name);
 
-		// Webstart Application uses this:
-		if (webstart) {
-
-			try {
-				result = new FileInputStream(name);
-			} catch (Exception e) {
-				result = new URL(server + name).openStream();
-			}
-
+		if (!Switches.loaded) {
+			System.out.println("Checking zip " + name + " ...");
 		}
-		// Applet & Standalone emulator uses this code:
-		else {
-			try {
-				result = new URL(applet.getCodeBase(), name).openStream();
-			} catch (Exception e) {
-				result = new FileInputStream(name);
-			}
-		}
-		if (!Switches.loaded)
-			System.out.println("Checking zip....");
+
 		zipcount = 0;
-		LinkedList<String> entries = new LinkedList<String>();
+		LinkedList<String> entries = new LinkedList<>();
 		count = rubbish = 0;
+
 		ZipEntry zipentry;
 		ZipInputStream zipinputr = new ZipInputStream(result);
 		while ((zipentry = zipinputr.getNextEntry()) != null) {
 			String EntryName = zipentry.getName().toLowerCase();
 			entries.add(EntryName);
 		}
+
 		box.removeAllItems();
 		box.addItemListener(this);
 		Iterator<String> i = entries.iterator();

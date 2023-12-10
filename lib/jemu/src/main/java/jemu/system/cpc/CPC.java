@@ -341,10 +341,10 @@ public class CPC extends Computer {
 		z80.addOutputDeviceMapping(new DeviceMapping(fdc, 0x0580, 0x0100));
 		z80.addInputDeviceMapping(new DeviceMapping(fdc, 0x0580, 0x0100));
 		z80.addOutputDeviceMapping(new DeviceMapping(this, 0x581, 0x0000));
-		for (int i = 0; i < 4; i++) {
-			fdc.setDrive(i, floppies[i] = new Drive(i == 0 ? 1 : 2));
-			fdc.setDrive(i, null);
-		}
+		// TSOFT for (int i = 0; i < 4; i++) {
+		//	fdc.setDrive(i, floppies[i] = new Drive(i == 0 ? 1 : 2));
+		//	fdc.setDrive(i, null);
+		//}
 		setBasePath("cpc");
 	}
 
@@ -614,7 +614,7 @@ public class CPC extends Computer {
 		autotyper = 0;
 		stop();
 		super.reset();
-		fdc.reset();
+		// TSOFT fdc.reset();
 		memory.reset();
 		reSync();
 		z80.reset();
@@ -705,7 +705,7 @@ public class CPC extends Computer {
 			FDCReset = false;
 		}
 		gateArray.cycle();
-		fdc.cycle();
+		// TSOFT fdc.cycle();
 		if ((audioCount += audioAdd / Switches.turbo) >= AUDIO_TEST) {
 			psg.writeAudio();
 			audioCount -= AUDIO_TEST;

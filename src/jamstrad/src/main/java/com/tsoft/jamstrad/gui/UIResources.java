@@ -90,7 +90,7 @@ public class UIResources {
 	private static ImageIcon loadIcon(String resourceName) {
 		ImageIcon icon = null;
 		try {
-			InputStream in = UIResources.class.getResourceAsStream("icons/" + resourceName);
+			InputStream in = UIResources.class.getResourceAsStream("/icons/" + resourceName);
 			icon = new ImageIcon(ImageIO.read(in));
 			in.close();
 		} catch (IOException e) {

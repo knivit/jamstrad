@@ -159,8 +159,8 @@ public class JEMU extends Applet implements KeyListener, MouseListener, ItemList
 
 	String keys = "";
 
-	final URL discimageA = getClass().getResource("image/discA.gif");
-	final URL discimageB = getClass().getResource("image/discB.gif");
+	final URL discimageA = getClass().getResource("/image/discA.gif");
+	final URL discimageB = getClass().getResource("/image/discB.gif");
 	final ImageIcon discA = new ImageIcon(discimageA);
 	final ImageIcon discB = new ImageIcon(discimageB);
 
@@ -181,10 +181,10 @@ public class JEMU extends Applet implements KeyListener, MouseListener, ItemList
 	JButton cancel = new JButton("Cancel");
 	JLabel Sn = new JLabel("Choose Snapshot-format:");
 
-	JLabel Moniup = new JLabel(new ImageIcon(getClass().getResource("image/moniup.jpg")));
-	JLabel Monidown = new JLabel(new ImageIcon(getClass().getResource("image/monidown.jpg")));
-	JLabel Monileft = new JLabel(new ImageIcon(getClass().getResource("image/monileft.jpg")));
-	JLabel Moniright = new JLabel(new ImageIcon(getClass().getResource("image/moniright.jpg")));
+	JLabel Moniup = new JLabel(new ImageIcon(getClass().getResource("/image/moniup.jpg")));
+	JLabel Monidown = new JLabel(new ImageIcon(getClass().getResource("/image/monidown.jpg")));
+	JLabel Monileft = new JLabel(new ImageIcon(getClass().getResource("/image/monileft.jpg")));
+	JLabel Moniright = new JLabel(new ImageIcon(getClass().getResource("/image/moniright.jpg")));
 
 	JPanel Monitoruppanel = null;
 	JPanel Monitordownpanel = null;
@@ -286,10 +286,10 @@ public class JEMU extends Applet implements KeyListener, MouseListener, ItemList
 
 	boolean osd;
 
-	JButton okay = new JButton(new ImageIcon(getClass().getResource("image/aboutok.gif")));
+	JButton okay = new JButton(new ImageIcon(getClass().getResource("/image/aboutok.gif")));
 	JFrame about;
-	JLabel JJemu = new JLabel(new ImageIcon(getClass().getResource("image/about.png")));
-	JLabel JLogo = new JLabel(new ImageIcon(getClass().getResource("image/javacpc.gif")));
+	JLabel JJemu = new JLabel(new ImageIcon(getClass().getResource("/image/about.png")));
+	JLabel JLogo = new JLabel(new ImageIcon(getClass().getResource("/image/javacpc.gif")));
 
 	// private ResourceBundle msg_dbg; // Not used yet
 	public String getParameter(String key, String def) {
@@ -658,7 +658,7 @@ public class JEMU extends Applet implements KeyListener, MouseListener, ItemList
 		content.setRows(25);
 		content.setText("");
 		Font font = new Font("Courier", 1, 10);
-		InputStream in = getClass().getResourceAsStream("security.ttf");
+		InputStream in = getClass().getResourceAsStream("/security.ttf");
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(Font.BOLD, 28);
 		} catch (Exception er) {

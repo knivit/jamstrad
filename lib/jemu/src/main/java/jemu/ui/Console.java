@@ -44,7 +44,7 @@ public class Console extends WindowAdapter implements WindowListener, ActionList
 		frameconsole.setBounds(x,y,350,400);
 
 		textArea=new JTextArea();
-		InputStream in = getClass().getResourceAsStream("amstrad.ttf");
+		InputStream in = getClass().getResourceAsStream("/amstrad.ttf");
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(Font.PLAIN, 8);
 		}
@@ -90,18 +90,11 @@ public class Console extends WindowAdapter implements WindowListener, ActionList
 		button3.setFocusable(false);
 		button3.addActionListener(this);
 
-		try
-		{
+		try {
 			PipedOutputStream pout=new PipedOutputStream(this.pin);
 			System.setOut(new PrintStream(pout,true));
-		}
-		catch (java.io.IOException io)
-		{
-			textArea.append("Couldn't redirect STDOUT to this console\n"+io.getMessage());
-		}
-		catch (SecurityException se)
-		{
-			textArea.append("Couldn't redirect STDOUT to this console\n"+se.getMessage());
+		} catch (Exception ex) {
+			textArea.append("Couldn't redirect STDOUT to this console\n"+ ex.getMessage());
 		}
 
 		try

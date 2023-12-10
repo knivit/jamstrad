@@ -36,7 +36,7 @@ public class MonitorMaskFactory {
 		if (CTM644 == null) {
 			Image image = null;
 			try {
-				image = ImageIO.read(getClass().getResource("image/ctm644.png"));
+				image = ImageIO.read(getClass().getResource("/image/ctm644.png"));
 			} catch (IOException e) {
 				System.err.println(e);
 			}
@@ -49,7 +49,7 @@ public class MonitorMaskFactory {
 		if (GT65 == null) {
 			Image image = null;
 			try {
-				image = ImageIO.read(getClass().getResource("image/gt65.png"));
+				image = ImageIO.read(getClass().getResource("/image/gt65.png"));
 			} catch (IOException e) {
 				System.err.println(e);
 			}
@@ -62,7 +62,7 @@ public class MonitorMaskFactory {
 		if (MINIMAL == null) {
 			Image image = null;
 			try {
-				image = ImageIO.read(getClass().getResource("image/tv-minimal.png"));
+				image = ImageIO.read(getClass().getResource("/image/tv-minimal.png"));
 			} catch (IOException e) {
 				System.err.println(e);
 			}

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package jemu.core.samples;
 
 /**
@@ -15,36 +10,34 @@ import java.net.URL;
 
 import javax.sound.sampled.*;
 
-
-
 /**
  * This enum encapsulates all the sound effects
  */
 
 public enum Samples {
-   BREAK("jemu/core/samples/wav/breakpoint.wav"),
-   BREAKI("jemu/core/samples/wav/instruction.wav"),
-   EJECT("jemu/core/samples/wav/eject.wav"),
-   INSERT("jemu/core/samples/wav/insert.wav"),
-   MOTOR("jemu/core/samples/wav/motor.wav"),
-   SEEK("jemu/core/samples/wav/seek.wav"),
-   SEEKBACK("jemu/core/samples/wav/seekback.wav"),
-   TRACK("jemu/core/samples/wav/track.wav"),
-   TRACKBACK("jemu/core/samples/wav/trackback.wav"),
-   DEGAUSS("jemu/core/samples/wav/monitoron.wav"),
-   RELAIS("jemu/core/samples/wav/relon.wav"),
-   RELAISOFF("jemu/core/samples/wav/reloff.wav"),
-   TAPEMOTOR("jemu/core/samples/wav/tapmotor.wav"),
-   WINDMOTOR("jemu/core/samples/wav/wind.wav"),
-   REWINDMOTOR("jemu/core/samples/wav/rewind.wav"),
-   TAPEKEY("jemu/core/samples/wav/tapekey.wav"),
-   TAPESTOP("jemu/core/samples/wav/tapestop.wav"),
-   TAPEINSERT("jemu/core/samples/wav/tape_insert.wav"),
-   PRINTER("jemu/core/samples/wav/printer.wav"),
-   TAPEEJECT("jemu/core/samples/wav/tape_eject.wav"),
-   KEY("jemu/core/samples/wav/cpckey.wav"),
-   ENTER("jemu/core/samples/wav/cpcenter.wav"),
-   SPACE("jemu/core/samples/wav/cpcspace.wav");
+   BREAK("/wav/breakpoint.wav"),
+   BREAKI("/wav/instruction.wav"),
+   EJECT("/wav/eject.wav"),
+   INSERT("/wav/insert.wav"),
+   MOTOR("/wav/motor.wav"),
+   SEEK("/wav/seek.wav"),
+   SEEKBACK("/wav/seekback.wav"),
+   TRACK("/wav/track.wav"),
+   TRACKBACK("/wav/trackback.wav"),
+   DEGAUSS("/wav/monitoron.wav"),
+   RELAIS("/wav/relon.wav"),
+   RELAISOFF("/wav/reloff.wav"),
+   TAPEMOTOR("/wav/tapmotor.wav"),
+   WINDMOTOR("/wav/wind.wav"),
+   REWINDMOTOR("/wav/rewind.wav"),
+   TAPEKEY("/wav/tapekey.wav"),
+   TAPESTOP("/wav/tapestop.wav"),
+   TAPEINSERT("/wav/tape_insert.wav"),
+   PRINTER("/wav/printer.wav"),
+   TAPEEJECT("/wav/tape_eject.wav"),
+   KEY("/wav/cpckey.wav"),
+   ENTER("/wav/cpcenter.wav"),
+   SPACE("/wav/cpcspace.wav");
 
    // Nested class for specifying volume
    public static enum Volume {
@@ -60,7 +53,7 @@ public enum Samples {
    Samples(String soundFileName) {
       try {
          // Use URL (instead of File) to read from disk and JAR.
-         URL url = this.getClass().getClassLoader().getResource(soundFileName);
+         URL url = getClass().getResource(soundFileName);
          // Set up an audio input stream piped from the sound file.
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
          // Get a clip resource.

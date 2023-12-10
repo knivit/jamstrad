@@ -200,7 +200,7 @@ public void windowIconified(WindowEvent e) {
       btnSTOP.setFocusable(false);
       btnSAVE.setFocusable(false);
       YM_Counter.setFocusable(false);
-      InputStream in = getClass().getResourceAsStream("tran.ttf");
+      InputStream in = getClass().getResourceAsStream("/tran.ttf");
                 try {
                 font = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(0, 54);
                 YM_Counter.setFont(this.font);

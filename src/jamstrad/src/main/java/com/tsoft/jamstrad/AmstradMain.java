@@ -1,9 +1,6 @@
 package com.tsoft.jamstrad;
 
-import java.io.File;
 import java.util.Properties;
-
-import com.tsoft.jamstrad.program.repo.cleaner.GetdownProgramFileRepositoryCleaner;
 
 public class AmstradMain {
 
@@ -11,14 +8,17 @@ public class AmstradMain {
 
 	public static void main(String[] args) throws Exception {
 		AmstradContext context = AmstradFactory.getInstance().getAmstradContext();
+
 		context.initJavaConsole();
-		System.out.println("Launching AmstradPc");
-		overrideSettingsFromSytemProperties(context);
-		cleanManagedProgramRepository(context);
+
+		System.out.println("Launching JAmstrad");
+
+		overrideSettingsFromSystemProperties(context);
+
 		context.getMode().launch(args);
 	}
 
-	private static void overrideSettingsFromSytemProperties(AmstradContext context) {
+	private static void overrideSettingsFromSystemProperties(AmstradContext context) {
 		Properties props = System.getProperties();
 		for (String prop : props.stringPropertyNames()) {
 			if (prop.startsWith(SETTING_OVERRIDE_PREFIX)) {
@@ -28,16 +28,4 @@ public class AmstradMain {
 			}
 		}
 	}
-
-	private static void cleanManagedProgramRepository(AmstradContext context) {
-		if (context.isManagedProgramRepositoryCleanupEnabled()) {
-			File managedFolder = context.getManagedProgramRepositoryRootFolder();
-			if (managedFolder != null) {
-				if (context.isLaunchedByGetdown()) {
-					new GetdownProgramFileRepositoryCleaner().cleanProgramRepository(managedFolder, true);
-				}
-			}
-		}
-	}
-
 }

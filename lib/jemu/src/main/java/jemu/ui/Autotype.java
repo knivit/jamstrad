@@ -79,7 +79,7 @@ public class Autotype extends WindowAdapter implements WindowListener, ActionLis
 		textArea.setSelectedTextColor(Color.DARK_GRAY);
 		textArea.setSelectionColor(Color.LIGHT_GRAY);
 		textArea.setBorder(new BevelBorder(BevelBorder.LOWERED));
-		InputStream in = getClass().getResourceAsStream("amstrad.ttf");
+		InputStream in = getClass().getResourceAsStream("/amstrad.ttf");
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(Font.PLAIN, 8);
 		} catch (Exception e) {

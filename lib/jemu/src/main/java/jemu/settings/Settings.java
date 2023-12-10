@@ -1,11 +1,28 @@
 package jemu.settings;
 
+import jemu.ui.Switches;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
+
 /**
  * User settings from last session.
- * 
+ *
  * @author Roland.Barthel
  */
 public class Settings {
+
+	/** the properties file. */
+	private static File     file2       = new File(System.getProperty("/"), "javacpc.ini");
+	private static File     file       = new File(System.getProperty("user.home"), "javacpc.ini");
+
+	/** the settings instance. */
+	private static final Settings instance   = new Settings();
+
+	/** the properties. */
+	private final Properties      props      = new Properties();
 
 	public static final String FLOPPYX = "floppy_xpos";
 	public static final String FLOPPYY = "floppy_ypos";
@@ -115,7 +132,6 @@ public class Settings {
 	// Rom banks
 	// in progress
 	//
-
 	public static final String LOWER_ROM = "lower";
 	public static final String UPPER_ROM_0 = "upper_0";
 	public static final String UPPER_ROM_1 = "upper_1";
@@ -153,55 +169,95 @@ public class Settings {
 	public static final String rom15 = "upperF_index";
 
 	/**
-	 * Return a boolean property value.
-	 * 
-	 * @param key
-	 *            property key
-	 * @param defaultValue
-	 *            default when property is not set
-	 * @return value or default
+	 * Create a new instance and load user settings.
 	 */
-	public static boolean getBoolean(final String key, final boolean defaultValue) {
-		final String value = get(key, String.valueOf(defaultValue));
-		return value.equals("true");
+	private Settings() {
+		if (Switches.executable)
+			file = file2;
+		try {
+			if (System.getSecurityManager() != null) {
+				System.getSecurityManager().checkRead(file.getAbsolutePath());
+			}
+			this.props.load(new FileInputStream(file));
+			System.out.println("loaded " + this.props.size() + " user settings");
+		} catch (final Throwable t) {
+			System.out.println("can't load user settings (" + t.getMessage() + ")");
+		}
 	}
 
 	/**
+	 * Return a boolean property value.
+	 *
+	 * @param key property key
+	 * @param defaultValue default when property is not set
+	 * @return value or default
+	 */
+	public static boolean getBoolean(final String key, final boolean defaultValue) {
+		final String value = instance.props.getProperty(key);
+		if (value == null) {
+			return defaultValue;
+		}
+		return value.equals("true");
+	}
+
+
+	/**
 	 * Set a boolean property value.
-	 * 
-	 * @param key
-	 *            property key
-	 * @param value
-	 *            boolean value to set
+	 *
+	 * @param key property key
+	 * @param value boolean value to set
 	 */
 	public static void setBoolean(final String key, final boolean value) {
-		set(key, String.valueOf(value));
+		instance.props.setProperty(key, value ? "true" : "false");
+		save();
 	}
 
 	/**
 	 * Return a property value.
-	 * 
-	 * @param key
-	 *            property key
-	 * @param defaultValue
-	 *            default when property is not set
+	 *
+	 * @param key property key
+	 * @param defaultValue default when property is not set
 	 * @return value or default
 	 */
 	public static String get(final String key, final String defaultValue) {
-		throw new IllegalStateException();
-		//return instance.getSource().get(key, defaultValue);
+		String value = instance.props.getProperty(key);
+
+		if (value == null) {
+			return defaultValue;
+		}
+		return value;
 	}
 
 	/**
 	 * Set a property value.
-	 * 
-	 * @param key
-	 *            property key
-	 * @param value
-	 *            value to set
+	 *
+	 * @param key property key
+	 * @param value value to set
 	 */
 	public static void set(final String key, final String value) {
-		throw new IllegalStateException();
-		//instance.getSource().set(key, value);
+		if (value.equals(get(key, null))) {
+			return;
+		}
+		instance.props.setProperty(key, value);
+		save();
+	}
+
+	/**
+	 * Save the current settings.
+	 */
+	private static void save() {
+		if (Switches.executable)
+			file = file2;
+		try {
+			if (System.getSecurityManager() != null) {
+				System.getSecurityManager().checkWrite(file.getAbsolutePath());
+			}
+			final FileOutputStream fos = new FileOutputStream(file);
+			//  instance.props.store(fos, "# JavaCPC Configuration file");
+			instance.props.store(fos, "[Settings]");
+
+		} catch (final Throwable t) {
+			System.out.println("can't save user settings (" + t.getMessage() + ")");
+		}
 	}
 }

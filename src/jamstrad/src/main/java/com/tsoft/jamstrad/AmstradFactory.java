@@ -229,8 +229,7 @@ public class AmstradFactory {
 
 		@Override
 		public void initJavaConsole() {
-			throw new IllegalStateException();
-			//Console.init();
+			// TSOFT Console.init();
 		}
 
 		@Override

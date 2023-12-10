@@ -1,10 +1,6 @@
 package jemu.core.device.io;
 
-import jemu.core.*;
 import jemu.core.device.*;
-
-import jemu.ui.Display;
-import jemu.core.device.sound.*;
 
 /**
  * Title:        JEMU
@@ -26,7 +22,7 @@ public class PPI8255 extends Device {
   protected int portLowTest  = 0x01;
   protected int portHighMask = 0x02;
   protected int portHighTest = 0x02;
-static int storedControl = 0;
+  static int storedControl = 0;
   protected IOPort[] ports = new IOPort[] {
     new IOPort(IOPort.READ), new IOPort(IOPort.READ), new IOPort(IOPort.READ),
     new IOPort(IOPort.WRITE)

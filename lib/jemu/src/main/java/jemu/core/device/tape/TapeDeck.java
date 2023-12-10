@@ -27,21 +27,21 @@ public class TapeDeck extends Frame implements WindowListener{
 
     GraphicDisplay gfx = new GraphicDisplay();
 
-  final URL tapeemp = getClass().getResource("image/tapea.png");
+  final URL tapeemp = getClass().getResource("/image/tapea.png");
   final ImageIcon tapeempty = new ImageIcon(tapeemp);
-  final URL tapef = getClass().getResource("image/tapeb.png");
+  final URL tapef = getClass().getResource("/image/tapeb.png");
   final ImageIcon tape = new ImageIcon(tapef);
-  final URL recb = getClass().getResource("image/but_rec.png");
+  final URL recb = getClass().getResource("/image/but_rec.png");
   final ImageIcon recbu = new ImageIcon(recb);
-  final URL rewb = getClass().getResource("image/but_rew.png");
+  final URL rewb = getClass().getResource("/image/but_rew.png");
   final ImageIcon rewbu = new ImageIcon(rewb);
-  final URL ffb = getClass().getResource("image/but_ff.png");
+  final URL ffb = getClass().getResource("/image/but_ff.png");
   final ImageIcon ffbu = new ImageIcon(ffb);
-  final URL playb = getClass().getResource("image/but_play.png");
+  final URL playb = getClass().getResource("/image/but_play.png");
   final ImageIcon playbu = new ImageIcon(playb);
-  final URL stopb = getClass().getResource("image/but_stop.png");
+  final URL stopb = getClass().getResource("/image/but_stop.png");
   final ImageIcon stopbu = new ImageIcon(stopb);
-  final URL pauseb = getClass().getResource("image/but_pause.png");
+  final URL pauseb = getClass().getResource("/image/but_pause.png");
   final ImageIcon pausebu = new ImageIcon(pauseb);
   final JLabel tapeDeck = new JLabel(tape);
       public static Color CPCGRAY = new Color(0x37,0x37,0x37);
