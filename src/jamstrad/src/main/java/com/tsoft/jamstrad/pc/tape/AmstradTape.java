@@ -29,7 +29,7 @@ public abstract class AmstradTape extends AmstradDevice {
 
 	protected AmstradTape(AmstradPc amstradPc) {
 		super(amstradPc);
-		this.tapeListeners = new GenericListenerList<AmstradTapeListener>();
+		this.tapeListeners = new GenericListenerList<>();
 	}
 
 	public void loadSourceCodeFromFile(File sourceCodeFile) throws IOException, BasicException {

@@ -557,7 +557,7 @@ public abstract class AmstradDisplayCanvas {
 
 		private void loadSystemSymbolChart() {
 			try {
-				InputStream in = getClass().getResourceAsStream("image/amstrad-ascii.png");
+				InputStream in = getClass().getResourceAsStream("/image/amstrad-ascii.png");
 				symbolChart = ImageIO.read(in);
 				symbolChartRaster = symbolChart.getRaster();
 				customSymbol32 = false;

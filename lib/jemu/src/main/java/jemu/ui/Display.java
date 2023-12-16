@@ -219,6 +219,7 @@ public class Display extends JComponent {
 			displayFont = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(0, 8);
 		} catch (Exception e) {
 		}
+		
 		int[] pixelsc = new int[16 * 16];
 		imagec = Toolkit.getDefaultToolkit().createImage(new MemoryImageSource(16, 16, pixelsc, 0, 16));
 		blankCursor = Cursor.getDefaultCursor();// Toolkit.getDefaultToolkit().createCustomCursor(imagec, new Point(0,

@@ -21,7 +21,7 @@ public abstract class AmstradMonitor extends AmstradDevice {
 
 	protected AmstradMonitor(AmstradPc amstradPc) {
 		super(amstradPc);
-		this.monitorListeners = new GenericListenerList<AmstradMonitorListener>();
+		this.monitorListeners = new GenericListenerList<>();
 	}
 
 	public abstract AmstradGraphicsContext getGraphicsContext();
